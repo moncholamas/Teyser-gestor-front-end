@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Button, Divider, ListItemIcon, ListItemText, MenuItem, MenuList } from '@material-ui/core'
+import {Divider, ListItemIcon, ListItemText, MenuItem, MenuList, Typography } from '@material-ui/core'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ForumIcon from '@material-ui/icons/Forum';
 import { LiveHelp } from '@material-ui/icons';
@@ -8,6 +8,16 @@ import {Link} from 'wouter';
 export function Menu(){
     return (
         <MenuList >
+            <Link href="/">
+                <Typography 
+                    variant="h5" 
+                    color="primary" 
+                    align="center"
+                >
+                    Teyser Gestor
+                </Typography>
+            </Link>
+            <br/>
             <Divider></Divider>
             <Link href="/">
             <MenuItem>

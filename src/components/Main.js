@@ -1,25 +1,28 @@
 import React from 'react';
-import {Box, Grid, Typography} from '@material-ui/core';
-import {Route} from 'wouter';
+import { Box, Grid } from '@material-ui/core';
+import { Route } from 'wouter';
 import { Login } from './Main/Login';
 import { Contacto } from './Main/Contacto';
 import { Acerca } from './Main/Acerca';
+import { Logup } from './Main/Logup';
 
 export function Main (){
     //llamar un componente distinto segun la ruta
     return (
         <Box
         sx={{
-            marginTop:3,
-            padding:3,
-            height: 450
-
+            padding: 20,
+            paddingX: 5,   
+            minHeight: 450
         }}
         >
             <Grid container height={450}>
             
                 <Route path="/">
                     <Login></Login>
+                </Route>
+                <Route path="/nuevo">
+                    <Logup></Logup>
                 </Route>
                 <Route path="/contacto">
                     <Contacto></Contacto>

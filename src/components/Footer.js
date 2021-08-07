@@ -8,18 +8,20 @@ export function Footer(){
         <Box component="footer" sx={{
             height: 100,
             marginTop: 30,
-            padding: 20
+            padding: 20,
+            bgcolor: 'primary'
         }}>
         
             <Grid container>
                 <Grid item xs={6}>
-                    <Box color="primary">
-                        <Typography variant="h6" color="inherit" align="center" >Pie de pagina</Typography>
-                    </Box>
+                    <Typography variant="body1" color="textPrimary" align="center" >Mas info pie de pagina</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                    <Typography variant="body1" color="inherit" align="center" >Mas info pie de pagina</Typography>
+                    <Box color="text.primary" clone>
+                        <Typography variant="body2" color="textPrimary" align="center" >Teyser - Gestor | 2021</Typography>
+                    </Box>
                 </Grid>
+                
             </Grid>
         </Box>
         </>

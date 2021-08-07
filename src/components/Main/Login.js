@@ -6,7 +6,7 @@ import React from 'react';
 export function Login(){
     return (
         <>
-        <Grid item xs="10" mt={3}>
+        <Grid item xs={10} mt={3}>
             <Typography variant="h3" align="center">
                 Bienvenido
             </Typography>
@@ -15,7 +15,7 @@ export function Login(){
             </Typography>
         </Grid>
         
-        <Grid item xs="10">
+        <Grid item xs={10}>
             <Box component="form" textAlign="center" mt={3}>
                 <TextField
                     id="outlined-helperText"
@@ -35,9 +35,9 @@ export function Login(){
                     Entrar
                 </Button>
                 <br/><br/>
-                <WLink href="/contacto" component={Link}>
+                <WLink href="/nuevo" component={Link}>
                     <Link variant="body2">
-                        ¿Problemas para ingresar?
+                        Crear una cuenta.
                     </Link> 
                 </WLink>
             </Box>

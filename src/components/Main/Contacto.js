@@ -1,10 +1,11 @@
 import { Box, TextField, Typography, Grid, Button } from '@material-ui/core';
+import { LinkedIn, WhatsApp } from '@material-ui/icons';
 import React from 'react';
 
 export function Contacto(){
     return (
         <>
-        <Grid item xs="10">
+        <Grid item xs={10}>
                 <Typography variant="h3" align="center">
                     Contactá con nosotros
                 </Typography>
@@ -13,7 +14,7 @@ export function Contacto(){
                 </Typography>
         </Grid>
         
-        <Grid item xs="5">
+        <Grid item xs={5}>
             <Box component="form" textAlign="center" >
                 <TextField
                     id="outlined-helperText"
@@ -37,15 +38,25 @@ export function Contacto(){
                 </Button>
             </Box>
         </Grid>
-        <Grid item xs="4">
+        <Grid item xs={4} align="center">
             <Typography variant="body1">
                 Redes sociales:
             </Typography>
-            <Button color="primary" variant="contained" size="large">
+            <Button 
+                color="primary" 
+                variant="contained" 
+                size="large"
+                startIcon={<WhatsApp/>}
+            >
                 WhatsApp
             </Button>
             <br/><br/>
-            <Button color="primary" variant="contained" size="large">
+            <Button 
+                color="primary" 
+                variant="contained" 
+                size="large"
+                startIcon={<LinkedIn/>}
+            >
                 Linkedin
             </Button>
         </Grid>
