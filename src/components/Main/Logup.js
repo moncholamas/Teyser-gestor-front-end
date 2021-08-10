@@ -21,13 +21,7 @@ export function Logup(){
     const enviarForm = async (e)=>{
         const url="http://localhost:3009/ingresar/nuevo"
         e.preventDefault();
-        const {nombre, apellido, correo, clave} = values
-        const nuevoUsuario= {
-            nombre,
-            apellido,
-            correo,
-            clave
-        }
+        
         const respuesta = await fetch(url,{
             method:'POST',
             headers: {

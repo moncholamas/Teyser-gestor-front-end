@@ -19,7 +19,7 @@ export function Menu(){
             </Link>
             <br/>
             <Divider></Divider>
-            <Link href="/">
+            <Link href="/login">
             <MenuItem>
                 <ListItemIcon>
                     <PowerSettingsNewIcon/>
@@ -30,7 +30,7 @@ export function Menu(){
             </MenuItem>
             </Link>
             <Link href="/contacto">
-            <MenuItem >
+            <MenuItem>
                 <ListItemIcon>
                     <ForumIcon/>
                 </ListItemIcon>

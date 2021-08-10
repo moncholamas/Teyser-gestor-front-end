@@ -5,6 +5,7 @@ import { Login } from './Main/Login';
 import { Contacto } from './Main/Contacto';
 import { Acerca } from './Main/Acerca';
 import { Logup } from './Main/Logup';
+import { Home } from './Main/Home';
 
 export function Main (){
     //llamar un componente distinto segun la ruta
@@ -17,8 +18,11 @@ export function Main (){
         }}
         >
             <Grid container height={450}>
-            
+                
                 <Route path="/">
+                    <Home></Home>
+                </Route>
+                <Route path="/login">
                     <Login></Login>
                 </Route>
                 <Route path="/nuevo">
