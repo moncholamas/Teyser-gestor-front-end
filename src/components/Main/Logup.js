@@ -10,14 +10,18 @@ export function Logup(){
         apellido: '',
         correo: '',
         clave: '',
+        claveConfirm: '',
         showPassword: false,
       });
 
       const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-        Object.values(values).some(value => (value === ''))?setValido(false):setValido(true);
+        compararClaves(values) && Object.values(values).some(value => (value === ''))?setValido(false):setValido(true);
       };
-    
+
+    const compararClaves = ({clave,claveConfirm})=>{
+        return clave === claveConfirm;
+    }
     const enviarForm = async (e)=>{
         const url="http://localhost:3009/ingresar/nuevo"
         e.preventDefault();
@@ -75,8 +79,18 @@ export function Logup(){
                     id="clave"
                     label="Clave"
                     value={values.clave}
+                    type="password"
                     variant="outlined"
                     onChange={handleChange('clave')}
+                />
+                <br/><br/>
+                <TextField
+                    id="claveConfirm"
+                    label="Reingrese la clave"
+                    type="password"
+                    value={values.claveConfirm}
+                    variant="outlined"
+                    onChange={handleChange('claveConfirm')}
                 />
                 <br/><br/>
                 <Button 

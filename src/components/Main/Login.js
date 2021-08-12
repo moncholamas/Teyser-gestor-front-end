@@ -40,7 +40,7 @@ export function Login(){
         <>
         <Grid item xs={10} mt={3}>
             <Typography variant="h3" align="center">
-                Bienvenido
+                Ingresar
             </Typography>
             <Typography variant="h6" align="center">
                 Inicie sesión para comenzar
@@ -60,6 +60,7 @@ export function Login(){
                 <TextField
                     id="clave"
                     label="Clave"
+                    type="password"
                     value={values.clave}
                     variant="outlined"
                     onChange={handleChange("clave")}
