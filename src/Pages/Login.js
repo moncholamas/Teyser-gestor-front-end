@@ -3,8 +3,10 @@ import Link from '@material-ui/core/Link';
 import {Link as WLink} from 'wouter';
 import {useLocation} from 'wouter';
 import React, {useState} from 'react';
+import { loginUser, useAuthDispatch } from '../context';
 
 export function Login(){
+    const dispatch = useAuthDispatch();
     const [location, setLocation] = useLocation();
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
@@ -19,21 +21,14 @@ export function Login(){
 
     const enviarForm = async (e) =>{
         e.preventDefault();
-        const url = 'http://localhost:3009/ingresar'
-        const res = await fetch(url,{
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(values)
-        })
-        const contenido = await res.json();
-        console.log(contenido);
-        console.log(location);
-        setTimeout(()=>{
+        const payload = {corre: values.correo,clave: values.clave}
+        try {
+            let response = await loginUser(dispatch,payload);
+            if (!response)return;
             setLocation('/');
-        },3000)
+        } catch (error) {
+            console.log(error)
+        }        
     }
     
     return (
