@@ -1,8 +1,8 @@
 import { Grid} from '@material-ui/core';
 import React from 'react';
-import { Footer } from './components/Footer';
-import { Main } from './components/Main';
-import {Menu} from './components/Menu'
+import { Footer } from './components/Footer/Footer';
+import { Main } from './components/Main/Main';
+import {Menu} from './components/Menu/Menu'
 
 function App() {
   //definir estilos generales (theme)

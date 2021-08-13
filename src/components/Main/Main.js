@@ -1,11 +1,11 @@
 import React from 'react';
 import { Box, Grid } from '@material-ui/core';
 import { Route } from 'wouter';
-import { Login } from './Main/Login';
-import { Contacto } from './Main/Contacto';
-import { Acerca } from './Main/Acerca';
-import { Logup } from './Main/Logup';
-import { Home } from './Main/Home';
+import { Login } from '../../Pages/Login';
+import { Contacto } from '../../Pages/Contacto';
+import { Acerca } from '../../Pages/Acerca';
+import { Logup } from '../../Pages/Logup';
+import { Home } from '../../Pages/Home';
 
 export function Main (){
     //llamar un componente distinto segun la ruta
@@ -18,7 +18,6 @@ export function Main (){
         }}
         >
             <Grid container height={450}>
-                
                 <Route path="/">
                     <Home></Home>
                 </Route>
@@ -34,7 +33,6 @@ export function Main (){
                 <Route path="/acerca">
                     <Acerca></Acerca>
                 </Route>
-            
              </Grid>
         </Box>
     );

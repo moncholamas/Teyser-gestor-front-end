@@ -1,41 +1,48 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-
-
+import {useLocation} from 'wouter';
 
 export function Logup(){
+    const [,setLocation]=useLocation();
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
         nombre: '',
         apellido: '',
         correo: '',
         clave: '',
-        claveConfirm: '',
-        showPassword: false,
-      });
+        claveConfirm: ''
+    });
 
-      const handleChange = (prop) => (event) => {
+    const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
-        compararClaves(values) && Object.values(values).some(value => (value === ''))?setValido(false):setValido(true);
-      };
+        Object.values(values).every(value => (value.length!==0))?setValido(true):setValido(false);
+    };
 
     const compararClaves = ({clave,claveConfirm})=>{
         return clave === claveConfirm;
     }
     const enviarForm = async (e)=>{
-        const url="http://localhost:3009/ingresar/nuevo"
         e.preventDefault();
-        
-        const respuesta = await fetch(url,{
-            method:'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(values)
-        })
-        const content = await respuesta.json();
-        console.log(content);
+        const url="http://localhost:3009/ingresar/nuevo"
+        if(compararClaves(values)){
+            const respuesta = await fetch(url,{
+                method:'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(values)
+            })
+            const content = await respuesta.json();
+            console.log(content);
+            setTimeout(() => {
+                setLocation('/login');
+            }, 3000);
+        }
+        else{
+            //cambiar validacion con alert de material UI
+            alert("Las claves no son iguales");
+        }
     }
 
     return (
@@ -54,6 +61,7 @@ export function Logup(){
                 <TextField
                     id="nombre"
                     label="Nombre"
+                    type="text"
                     value={values.nombre}
                     variant="outlined"
                     onChange={handleChange('nombre')}
@@ -62,6 +70,7 @@ export function Logup(){
                 <TextField
                     id="apellido"
                     label="Apellido"
+                    type="text"
                     value={values.apellido}
                     variant="outlined"
                     onChange={handleChange('apellido')}
@@ -71,6 +80,7 @@ export function Logup(){
                     id="correo"
                     label="Correo"
                     value={values.correo}
+                    type="mail"
                     variant="outlined"
                     onChange={handleChange('correo')}
                 />
