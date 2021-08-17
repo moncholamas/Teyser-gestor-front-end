@@ -7,7 +7,8 @@ import { loginUser, useAuthDispatch } from '../context';
 
 export function Login(){
     const dispatch = useAuthDispatch();
-    const [location, setLocation] = useLocation();
+
+    const [, setLocation] = useLocation();
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
         correo: '',
@@ -21,9 +22,11 @@ export function Login(){
 
     const enviarForm = async (e) =>{
         e.preventDefault();
-        const payload = {corre: values.correo,clave: values.clave}
+        const payload = {correo: values.correo,clave: values.clave}
+        console.log(payload)
         try {
             let response = await loginUser(dispatch,payload);
+            console.log(response)
             if (!response)return;
             setLocation('/');
         } catch (error) {
@@ -76,6 +79,7 @@ export function Login(){
                         Crear una cuenta.
                     </Link> 
                 </WLink>
+                
             </Box>
         </Grid>
         

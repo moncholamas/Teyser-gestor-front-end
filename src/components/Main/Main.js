@@ -1,11 +1,8 @@
 import React from 'react';
 import { Box, Grid } from '@material-ui/core';
-import { Route } from 'wouter';
-import { Login } from '../../Pages/Login';
-import { Contacto } from '../../Pages/Contacto';
-import { Acerca } from '../../Pages/Acerca';
-import { Logup } from '../../Pages/Logup';
-import { Home } from '../../Pages/Home';
+import routes from '../../config/routes'
+import AppRoutes from '../AppRoutes';
+import {Switch} from 'wouter';
 
 export function Main (){
     //llamar un componente distinto segun la ruta
@@ -18,21 +15,19 @@ export function Main (){
         }}
         >
             <Grid container height={450}>
-                <Route path="/">
-                    <Home></Home>
-                </Route>
-                <Route path="/login">
-                    <Login></Login>
-                </Route>
-                <Route path="/nuevo">
-                    <Logup></Logup>
-                </Route>
-                <Route path="/contacto">
-                    <Contacto></Contacto>
-                </Route>
-                <Route path="/acerca">
-                    <Acerca></Acerca>
-                </Route>
+                <Switch>
+                {
+                    routes.map(route =>  (<AppRoutes
+                            key={route.path}
+                            path={route.path}
+                            component={route.component}
+                            isPrivate={route.isPrivate}
+                            allowsInactive={route.allowsInactive}
+                            link={route.link}
+                        />)
+                    )
+                }
+                </Switch>
              </Grid>
         </Box>
     );

@@ -4,8 +4,13 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ForumIcon from '@material-ui/icons/Forum';
 import { LiveHelp } from '@material-ui/icons';
 import {Link} from 'wouter';
+import { useAuthState } from '../../context';
+
 
 export function Menu(){
+
+    const userDetails = useAuthState();
+
     return (
         <>
             <MenuList >
@@ -50,8 +55,20 @@ export function Menu(){
                     </ListItemText>
                 </MenuItem>
                 </Link>
+                <Link href="/ventas">
+                <MenuItem>
+                    <ListItemIcon>
+                        <LiveHelp/>
+                    </ListItemIcon>
+                    <ListItemText>
+                        Ventas
+                    </ListItemText>
+                </MenuItem>
+                </Link>
                 <Divider></Divider>
-                
+                <Typography variant="body1">
+                    {userDetails.msg}
+                </Typography>
             </MenuList>          
      </>
         )};

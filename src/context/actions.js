@@ -1,20 +1,21 @@
-const ROOT_URL = "http://localhost:3009/ingresar"
+const ROOT_URL = "http://localhost:3009"
 
 export async function loginUser(dispatch, loginPayload){
     const requestOptions = {
         method: 'POST',
-        headres: {'Content-Type': 'aplication/json'},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(loginPayload)
     }
     try {
         dispatch({type:'REQUEST_LOGIN'});
         let response = await fetch(`${ROOT_URL}/ingresar`,requestOptions)
         let data = await response.json();
-        
-        if(data.user){
+
+        if(data.data){
             dispatch({type: 'LOGIN_SUCCESS', payload: data});
+            //desarmar el json con jwt y guardar los datos del usuario
             localStorage.setItem('currentUser',JSON.stringify(data));
-            return data
+            return data;
         }
 
         dispatch({type:'LOGIN_ERROR',error:data.errors[0]});
