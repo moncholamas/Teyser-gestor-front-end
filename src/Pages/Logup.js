@@ -1,9 +1,8 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-import {useLocation} from 'wouter';
 
 export function Logup(){
-    const [,setLocation]=useLocation();
+
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
         nombre: '',
@@ -36,7 +35,7 @@ export function Logup(){
             const content = await respuesta.json();
             console.log(content);
             setTimeout(() => {
-                setLocation('/login');
+                //setLocation('/login');
             }, 3000);
         }
         else{

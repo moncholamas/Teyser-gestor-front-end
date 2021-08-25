@@ -1,14 +1,12 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import {Link as WLink} from 'wouter';
-import {useLocation} from 'wouter';
+import {Link as WLink} from 'react-router-dom';
 import React, {useState} from 'react';
 import { loginUser, useAuthDispatch } from '../context';
 
 export function Login(){
     const dispatch = useAuthDispatch();
 
-    const [, setLocation] = useLocation();
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
         correo: '',
@@ -28,7 +26,7 @@ export function Login(){
             let response = await loginUser(dispatch,payload);
             console.log(response)
             if (!response)return;
-            setLocation('/');
+            //setLocation('/');
         } catch (error) {
             console.log(error)
         }        

@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'wouter';
+import { Link } from 'react-router-dom';
 
 export function Home(){
     return (
@@ -10,7 +10,7 @@ export function Home(){
                 Bienvenido
             </Typography>
             <Typography variant="body1" align="center">
-                Puede comenzar, <Link href="/login">iniciando sesión</Link>
+                Puede comenzar, <Link to="/login">iniciando sesión</Link>
             </Typography>
         </Grid>
         </>

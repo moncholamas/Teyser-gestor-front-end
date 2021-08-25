@@ -46,6 +46,20 @@ const routes = [
         isPrivate: true,
         allowsInactive: true,
         link: 'Ventas'
+    },
+    {
+        path: '/novedades',
+        component: Venta,
+        isPrivate: true,
+        allowsInactive: true,
+        link: 'Ventas'
+    },
+    {
+        path: '/equipos',
+        component: Venta,
+        isPrivate: true,
+        allowsInactive: true,
+        link: 'Ventas'
     }
 ]
 

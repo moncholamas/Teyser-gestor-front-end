@@ -3,9 +3,9 @@ import {Divider, ListItemIcon, ListItemText, MenuItem, MenuList, Typography } fr
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import ForumIcon from '@material-ui/icons/Forum';
 import { LiveHelp } from '@material-ui/icons';
-import {Link} from 'wouter';
+import {Link} from 'react-router-dom';
 import { useAuthState } from '../../context';
-
+import { MenuOperario } from './MenuOperario';
 
 export function Menu(){
 
@@ -14,7 +14,7 @@ export function Menu(){
     return (
         <>
             <MenuList >
-                <Link href="/">
+                <Link to="/">
                     <Typography 
                         variant="h5" 
                         color="primary" 
@@ -24,9 +24,11 @@ export function Menu(){
                     </Typography>
                 </Link>
                 <br/>
+
+                <MenuOperario/>
+
                 <Divider></Divider>
-                <Link href="/login">
-                <MenuItem>
+                <MenuItem component={Link} to={'/login'} >
                     <ListItemIcon>
                         <PowerSettingsNewIcon/>
                     </ListItemIcon>
@@ -34,9 +36,7 @@ export function Menu(){
                         Ingresar
                     </ListItemText>
                 </MenuItem>
-                </Link>
-                <Link href="/contacto">
-                <MenuItem>
+                <MenuItem component={Link} to={'/contacto'}>
                     <ListItemIcon>
                         <ForumIcon/>
                     </ListItemIcon>
@@ -44,9 +44,7 @@ export function Menu(){
                         Contacto
                     </ListItemText>
                 </MenuItem>
-                </Link>
-                <Link href="/acerca">
-                <MenuItem>
+                <MenuItem component={Link} to={'/acerca'}>
                     <ListItemIcon>
                         <LiveHelp/>
                     </ListItemIcon>
@@ -54,17 +52,9 @@ export function Menu(){
                         Acerca de 
                     </ListItemText>
                 </MenuItem>
-                </Link>
-                <Link href="/ventas">
-                <MenuItem>
-                    <ListItemIcon>
-                        <LiveHelp/>
-                    </ListItemIcon>
-                    <ListItemText>
-                        Ventas
-                    </ListItemText>
-                </MenuItem>
-                </Link>
+
+                
+                
                 <Divider></Divider>
                 <Typography variant="body1">
                     {userDetails.msg}
