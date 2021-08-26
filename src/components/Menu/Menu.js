@@ -8,7 +8,6 @@ import { useAuthState } from '../../context';
 import { MenuOperario } from './MenuOperario';
 
 export function Menu(){
-
     const userDetails = useAuthState();
 
     return (
@@ -24,9 +23,11 @@ export function Menu(){
                     </Typography>
                 </Link>
                 <br/>
-
-                <MenuOperario/>
-
+                 {/* Si esta logeado puede ver el menu de operario */}
+                 {
+                     userDetails.token? <MenuOperario/> : null
+                 }
+                
                 <Divider></Divider>
                 <MenuItem component={Link} to={'/login'} >
                     <ListItemIcon>

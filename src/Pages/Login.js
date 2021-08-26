@@ -1,11 +1,12 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import {Link as WLink} from 'react-router-dom';
+import {Link as WLink, useHistory} from 'react-router-dom';
 import React, {useState} from 'react';
 import { loginUser, useAuthDispatch } from '../context';
 
 export function Login(){
     const dispatch = useAuthDispatch();
+    const history = useHistory();
 
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
@@ -21,12 +22,10 @@ export function Login(){
     const enviarForm = async (e) =>{
         e.preventDefault();
         const payload = {correo: values.correo,clave: values.clave}
-        console.log(payload)
         try {
             let response = await loginUser(dispatch,payload);
-            console.log(response)
             if (!response)return;
-            //setLocation('/');
+            history.push("/ventas",{from:"Login"})
         } catch (error) {
             console.log(error)
         }        
@@ -72,11 +71,11 @@ export function Login(){
                     Entrar
                 </Button>
                 <br/><br/>
-                <WLink href="/nuevo" component={Link}>
-                    <Link variant="body2">
-                        Crear una cuenta.
-                    </Link> 
-                </WLink>
+                <Link component={WLink} to={'/nuevo'}>
+                        <Typography variant="body2">
+                            Crear una cuenta.
+                        </Typography> 
+                </Link>
                 
             </Box>
         </Grid>

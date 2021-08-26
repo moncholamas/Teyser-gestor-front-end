@@ -10,7 +10,7 @@ export function MenuOperario(){
     return (
         <>
                 <Divider></Divider>
-                <MenuItem component={Link} to={'/login'}>
+                <MenuItem component={Link} to={'/ventas'}>
                     <ListItemIcon>
                         <ShoppingCart/>
                     </ListItemIcon>
@@ -18,7 +18,7 @@ export function MenuOperario(){
                         Ventas
                     </ListItemText>
                 </MenuItem>
-                <MenuItem component={Link} to={'/contacto'}>
+                <MenuItem component={Link} to={'/novedades'}>
                     <ListItemIcon>
                         <Announcement/>
                     </ListItemIcon>
@@ -29,7 +29,7 @@ export function MenuOperario(){
 
                 <MenuAdmin/>
                 
-                <MenuItem component={Link} to={'/ventas'}>
+                <MenuItem component={Link} to={'/micuenta'}>
                     <ListItemIcon>
                         <AccountBoxIcon/>
                     </ListItemIcon>

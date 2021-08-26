@@ -4,7 +4,7 @@ import { useAuthDispatch, useAuthState,logout } from '../../context';
 
 
 
-export function Venta(){
+export function Venta(props){
     
     const dispatch = useAuthDispatch();
     const token = useAuthState();
@@ -18,6 +18,7 @@ export function Venta(){
             <Typography variant="h2">
                 {console.log(token)}
                 Bienvenidos a ventas
+                | estas en {props.location.pathname}
                 <Button onClick={logOutHandle}>
                     Cerrar Sesión
                 </Button>
