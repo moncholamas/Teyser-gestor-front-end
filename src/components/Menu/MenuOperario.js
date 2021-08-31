@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
 import { Announcement, ShoppingCart } from '@material-ui/icons';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MenuAdmin } from './MenuAdmin';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import { useAuthState } from '../../context';
@@ -29,7 +29,6 @@ export function MenuOperario(){
                         Novedades
                     </ListItemText>
                 </MenuItem>
-
                 {
                     userActual.rol==="admin"?
                     <MenuAdmin/>
