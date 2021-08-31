@@ -1,5 +1,7 @@
 //import React from 'react';
-
+let user = localStorage.getItem("currentUser")
+    ? JSON.parse(localStorage.getItem("currentUser")).user
+    : null;
 
 let token = localStorage.getItem("currentUser")
     ? JSON.parse(localStorage.getItem("currentUser")).data
@@ -7,6 +9,7 @@ let token = localStorage.getItem("currentUser")
 
 export const initialState = {
     token: null || token,
+    user: {} || user,
     loading: false,
     errorMsg: null
 }
@@ -22,12 +25,14 @@ export const AuthReducer = (initialState,action)=>{
             return {
                 ...initialState,
                 token: action.payload.data,
+                user:action.payload.user,
                 loading: false
             };
         case "LOGOUT":
             return {
                 ...initialState,
-                token: null
+                token: null,
+                user: {}
             }
         case "LOGIN_ERROR":
             return {

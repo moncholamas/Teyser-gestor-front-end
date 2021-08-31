@@ -2,12 +2,13 @@ import React from 'react';
 import {Divider,  MenuList, Typography } from '@material-ui/core'
 import {Link} from 'react-router-dom';
 import { useAuthState } from '../../context';
+import { isExpired } from 'react-jwt'
 import { MenuOperario } from './MenuOperario';
 import { MenuLogOff } from './MenuLogOff';
 
 export function Menu(){
-    const userDetails = useAuthState();
-
+    const userToken = useAuthState().token;
+    const expired = isExpired(userToken);
     return (
         <>
             <MenuList >
@@ -23,15 +24,15 @@ export function Menu(){
                 <br/>
                  {/* Si esta logeado puede ver el menu de operario */}
                  {
-                     userDetails.token? <MenuOperario/> : null
+                     !expired? <MenuOperario/> : null
                  }
                 <Divider></Divider>
                 
-                <MenuLogOff token={userDetails.token}/>
+                <MenuLogOff token={userToken}/>
                 
                 <Divider></Divider>
                 <Typography variant="body1">
-                    {userDetails.msg}
+                    
                 </Typography>
             </MenuList>          
      </>

@@ -1,18 +1,21 @@
 import React from 'react';
-import { MenuList } from '@material-ui/core'
-import { AsideVentas } from '../../Pages/Ventas/AsideVentas'
-import { Route } from 'react-router-dom';
-
+import routes from '../../config/routes';
+import {Route} from 'react-router-dom';
 
 export function AsideMain(){
     
 
     return (
         <>
-            <MenuList >
-                <Route path="/ventas">
-                    <AsideVentas></AsideVentas>
-                </Route>
-            </MenuList>          
+                {
+                    routes.map((route)=>(
+                        <Route
+                            key={route.path}
+                            path={route.path}
+                            component={route.aside}
+                        />
+                    ))
+                }
+                
      </>
 )};

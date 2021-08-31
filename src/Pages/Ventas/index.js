@@ -1,27 +1,25 @@
-import { Button, Typography } from '@material-ui/core';
+import {  Divider, Paper, Typography } from '@material-ui/core';
 import React from 'react';
-import { useAuthDispatch, useAuthState,logout } from '../../context';
-
 
 
 export function Venta(props){
     
-    const dispatch = useAuthDispatch();
-    const token = useAuthState();
-    const logOutHandle = ()=>{
-            logout(dispatch);
-            console.log("se deslogeó")
-            //setLocation('/');
-    }
+    
     return (
         <>
-            <Typography variant="h4">
-                {console.log(token)}
+        <Paper>
+            <Typography variant="h4" align="center">
                 Ventas
-                <Button onClick={logOutHandle}>
-                    Cerrar Sesión
-                </Button>
             </Typography>
+            <Divider></Divider>
+            <Typography variant="body1" align="center">
+                Ingrese una nueva venta
+            </Typography>
+
+        
+
+        </Paper>
+            
         </>
     )
 }

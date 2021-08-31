@@ -4,8 +4,11 @@ import { Announcement, ShoppingCart } from '@material-ui/icons';
 import {Link} from 'react-router-dom';
 import { MenuAdmin } from './MenuAdmin';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import { useAuthState } from '../../context';
+
 
 export function MenuOperario(){
+    const userActual = useAuthState().user;
 
     return (
         <>
@@ -27,7 +30,13 @@ export function MenuOperario(){
                     </ListItemText>
                 </MenuItem>
 
-                <MenuAdmin/>
+                {
+                    userActual.rol==="admin"?
+                    <MenuAdmin/>
+                    :
+                    null
+                }
+                
                 
                 <MenuItem component={Link} to={'/micuenta'}>
                     <ListItemIcon>

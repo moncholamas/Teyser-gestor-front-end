@@ -1,3 +1,4 @@
+import {decodeToken} from 'react-jwt'
 const ROOT_URL = "http://localhost:3009"
 
 export async function loginUser(dispatch, loginPayload){
@@ -10,11 +11,19 @@ export async function loginUser(dispatch, loginPayload){
         dispatch({type:'REQUEST_LOGIN'});
         let response = await fetch(`${ROOT_URL}/ingresar`,requestOptions)
         let data = await response.json();
-
-        if(data.data){
-            dispatch({type: 'LOGIN_SUCCESS', payload: data});
+        const tokenResponse = data.data;
+        if(tokenResponse){
+            //data {msg / data(token)}
+            const tokenDecoded = decodeToken(tokenResponse);
+            let payload = {
+                //token
+                data: tokenResponse,
+                //datos del usuario
+                user: tokenDecoded
+            }
+            dispatch({type: 'LOGIN_SUCCESS', payload});
             //desarmar el json con jwt y guardar los datos del usuario
-            localStorage.setItem('currentUser',JSON.stringify(data));
+            localStorage.setItem('currentUser',JSON.stringify(payload));
             return data;
         }
 

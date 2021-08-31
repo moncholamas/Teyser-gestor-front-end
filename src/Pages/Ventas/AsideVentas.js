@@ -1,25 +1,24 @@
-import { Button, Typography } from '@material-ui/core';
+import {  Typography } from '@material-ui/core';
 import React,{useEffect, useState} from 'react';
 import { useAuthState } from '../../context';
 
 
 export function AsideVentas(){  
-    const token = useAuthState().token;
+    const tokenUser = useAuthState().token;
     const [ventas,setventas] = useState([]);
     useEffect( ()=>{
-    async function traerVentas(){
+        async function traerVentas(){
         let res = await fetch("http://localhost:3009/ventas",{
             headers: {
                 "Content-Type": "application/json",
-                "x-token": token
+                "x-token": tokenUser
               },
         });
         let data = await res.json();
-        console.log(data.data)
         setventas(data.data);
     }
     traerVentas();
-    },[]);
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <>
             <Typography variant="h5">
