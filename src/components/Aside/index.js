@@ -1,25 +1,18 @@
 import React from 'react';
-import { MenuList, Typography } from '@material-ui/core'
+import { MenuList } from '@material-ui/core'
+import { AsideVentas } from '../../Pages/Ventas/AsideVentas'
+import { Route } from 'react-router-dom';
 
-import {Link} from 'react-router-dom';
 
-
-export function Aside(){
+export function AsideMain(){
     
 
     return (
         <>
             <MenuList >
-                <Link to="/">
-                    <Typography 
-                        variant="h2" 
-                        color="primary" 
-                        align="center"
-                    >
-                        Teyser Gestor
-                        soy un aside
-                    </Typography>
-                </Link>
+                <Route path="/ventas">
+                    <AsideVentas></AsideVentas>
+                </Route>
             </MenuList>          
      </>
 )};

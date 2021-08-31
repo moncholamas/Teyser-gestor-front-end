@@ -1,11 +1,9 @@
 import React from 'react';
-import {Divider, ListItemIcon, ListItemText, MenuItem, MenuList, Typography } from '@material-ui/core'
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-import ForumIcon from '@material-ui/icons/Forum';
-import { LiveHelp } from '@material-ui/icons';
+import {Divider,  MenuList, Typography } from '@material-ui/core'
 import {Link} from 'react-router-dom';
 import { useAuthState } from '../../context';
 import { MenuOperario } from './MenuOperario';
+import { MenuLogOff } from './MenuLogOff';
 
 export function Menu(){
     const userDetails = useAuthState();
@@ -27,34 +25,9 @@ export function Menu(){
                  {
                      userDetails.token? <MenuOperario/> : null
                  }
-                
                 <Divider></Divider>
-                <MenuItem component={Link} to={'/login'} >
-                    <ListItemIcon>
-                        <PowerSettingsNewIcon/>
-                    </ListItemIcon>
-                    <ListItemText>
-                        Ingresar
-                    </ListItemText>
-                </MenuItem>
-                <MenuItem component={Link} to={'/contacto'}>
-                    <ListItemIcon>
-                        <ForumIcon/>
-                    </ListItemIcon>
-                    <ListItemText>
-                        Contacto
-                    </ListItemText>
-                </MenuItem>
-                <MenuItem component={Link} to={'/acerca'}>
-                    <ListItemIcon>
-                        <LiveHelp/>
-                    </ListItemIcon>
-                    <ListItemText>
-                        Acerca de 
-                    </ListItemText>
-                </MenuItem>
-
                 
+                <MenuLogOff token={userDetails.token}/>
                 
                 <Divider></Divider>
                 <Typography variant="body1">

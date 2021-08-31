@@ -1,27 +1,19 @@
 import React from 'react';
-import { Box, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import routes from '../../config/routes'
 import AppRoutes from '../AppRoutes';
-import { Aside } from '../Aside';
-import { useAuthState } from '../../context';
+import { AsideMain } from '../Aside';
+import {  useAuthState } from '../../context';
 import {useJwt} from 'react-jwt'
 
 export function Main (){
     //llamar un componente distinto segun la ruta
-    const token = useAuthState();
-    const {decodedToken,isExpired} = useJwt(token);
-    console.log(`esto expiró? ${isExpired}`);
+    const userDetails = useAuthState();
+    const {decodedToken,isExpired} = useJwt(userDetails.token);
+
     return (
-            <Box
-            sx={{
-                padding: 20,
-                paddingX: 5,   
-                minHeight: 450
-            }}
-            component={Grid}
-            container
-            >
-                <Grid item xs={()=>isExpired?12:6} >
+        <Grid container spacing={2}>
+                <Grid item xs={isExpired?12:8} >
                     
                     {
                         routes.map(route =>  (<AppRoutes
@@ -31,23 +23,22 @@ export function Main (){
                                 component={route.component}
                                 isPrivate={route.isPrivate}
                                 allowsInactive={route.allowsInactive}
+                                isExpired={isExpired}
                         />)
                         )
                     }
                     
                 </Grid>
                 {   
-                
                     /* si tiene no posee token no muestra el submenu */
-                    ()=>!isExpired?
+                    isExpired?
                     null:
-                    (<Grid item xs={3}>
+                    (<Grid item xs={4}>
                         <Grid >
-                            <Aside />
+                            <AsideMain/>
                         </Grid>
                     </Grid>)
                 } 
-            </Box>
-
+        </Grid>
     );
 }

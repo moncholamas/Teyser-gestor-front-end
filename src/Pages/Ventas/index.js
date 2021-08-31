@@ -15,10 +15,9 @@ export function Venta(props){
     }
     return (
         <>
-            <Typography variant="h2">
+            <Typography variant="h4">
                 {console.log(token)}
-                Bienvenidos a ventas
-                | estas en {props.location.pathname}
+                Ventas
                 <Button onClick={logOutHandle}>
                     Cerrar Sesión
                 </Button>

@@ -14,7 +14,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-            <Grid container  >
+            <Grid container spacind={3} >
               <Grid item xs={2}>
                 <Menu />
               </Grid>

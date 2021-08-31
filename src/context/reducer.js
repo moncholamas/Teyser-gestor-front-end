@@ -2,11 +2,11 @@
 
 
 let token = localStorage.getItem("currentUser")
-    ? JSON.parse(localStorage.getItem("currentUser")).auth_token
-    : "";
+    ? JSON.parse(localStorage.getItem("currentUser")).data
+    : null;
 
 export const initialState = {
-    token: "" || token,
+    token: null || token,
     loading: false,
     errorMsg: null
 }
@@ -27,7 +27,7 @@ export const AuthReducer = (initialState,action)=>{
         case "LOGOUT":
             return {
                 ...initialState,
-                token: ""
+                token: null
             }
         case "LOGIN_ERROR":
             return {
