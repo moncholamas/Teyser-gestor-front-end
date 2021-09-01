@@ -1,13 +1,15 @@
 import React from 'react';
 import routes from '../../config/routes';
-import {Route} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
+import { useAuthState } from '../../context';
 
 export function AsideMain(){
-    
+    const userActual = useAuthState().user;
 
     return (
         <>
                 {
+                    userActual.rol==="admin"?
                     routes.map((route)=>(
                         <Route
                             key={route.path}
@@ -15,6 +17,7 @@ export function AsideMain(){
                             component={route.aside}
                         />
                     ))
+                    :<Redirect to="/ventas" />
                 }
                 
      </>

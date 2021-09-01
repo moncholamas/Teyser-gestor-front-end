@@ -1,8 +1,8 @@
 import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-
+import {useHistory} from 'react-router-dom'
 export function Logup(){
-
+    const history = useHistory();
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
         nombre: '',
@@ -33,9 +33,10 @@ export function Logup(){
                 body: JSON.stringify(values)
             })
             const content = await respuesta.json();
+            if (!content)return;
             console.log(content);
             setTimeout(() => {
-                //setLocation('/login');
+                history.push("/login",{from:"Logup"})
             }, 3000);
         }
         else{
