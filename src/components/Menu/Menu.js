@@ -29,11 +29,7 @@ export function Menu(){
                 <Divider></Divider>
                 
                 <MenuLogOff token={userToken}/>
-                
-                <Divider></Divider>
-                <Typography variant="body1">
-                    
-                </Typography>
+
             </MenuList>          
      </>
         )};

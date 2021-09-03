@@ -16,6 +16,8 @@ import { Novedades } from "../Pages/Novedades";
 import { AsideNovedades } from "../Pages/Novedades/AsideNovedades";
 import { Operadores } from "../Pages/Operadores";
 import { AsideOperadores } from "../Pages/Operadores/AsideOperadores";
+import { AsidePagos } from "../Pages/Pagos/AsidePagos";
+import { Pagos } from "../Pages/Pagos/Pagos";
 import { Productos } from "../Pages/Productos";
 import { AsideProductos } from "../Pages/Productos/AsideProductos";
 import { Stock } from "../Pages/Stock";
@@ -50,7 +52,7 @@ const routes = [
         component: Contacto,
         isPrivate: false,
         allowsInactive: true,
-        asi: ''
+        aside: ''
     },
     {
         path: '/acerca',
@@ -65,6 +67,13 @@ const routes = [
         isPrivate: true,
         allowsInactive: true,
         aside: AsideVentas
+    },
+    {
+        path: '/pagos',
+        component: Pagos,
+        isPrivate: false,
+        allowsInactive: true,
+        aside: AsidePagos
     },
     {
         path: '/novedades',

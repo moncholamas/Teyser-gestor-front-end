@@ -25,8 +25,8 @@ export function AsideOperadores(){
     },[]); // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <>
-            <Typography variant="h5">
-                Menu Operadores
+            <Typography variant="body2" align="center" color="primary">
+                Operadores actuales
                 <br/>
             </Typography>
             <MenuList>

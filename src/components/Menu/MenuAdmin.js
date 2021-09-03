@@ -1,6 +1,6 @@
 import React from 'react';
 import {  ListItemIcon, ListItemText, MenuItem } from '@material-ui/core'
-import { Battery80,  Dvr,  Print, ViewQuilt } from '@material-ui/icons';
+import {  AssignmentTurnedIn, Battery80,  Dvr,  Print, ViewQuilt } from '@material-ui/icons';
 import {Link} from 'react-router-dom';
 import TimelineIcon from '@material-ui/icons/Timeline';
 import PeopleIcon from '@material-ui/icons/People';
@@ -10,6 +10,14 @@ export function MenuAdmin(){
 
     return (
         <>
+                <MenuItem component={Link} to={'/pagos'}>
+                    <ListItemIcon>
+                        <AssignmentTurnedIn/>
+                    </ListItemIcon>
+                    <ListItemText>
+                        Pagos
+                    </ListItemText>
+                </MenuItem>
                 <MenuItem component={Link} to={'/productos'}>
                     <ListItemIcon>
                         <Print/>
