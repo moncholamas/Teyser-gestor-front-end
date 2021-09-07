@@ -4,7 +4,7 @@ import React, {useState, useEffect}  from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../../context';
 
-export function AsideOperadores(){ 
+export function AsideOperadores({statusMain}){ 
     const [operadores, setOperadores] = useState([]);
     const tokenUser = useAuthState().token;
     useEffect(()=>{
@@ -22,7 +22,7 @@ export function AsideOperadores(){
             setOperadores(data.data);
             }
             traerOperadores();
-    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+    },[statusMain]); // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <>
             <Typography variant="body2" align="center" color="primary">

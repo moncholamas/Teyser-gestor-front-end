@@ -2,7 +2,7 @@ import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import {Link as WLink, useHistory} from 'react-router-dom';
 import React, {useState} from 'react';
-import { loginUser, useAuthDispatch } from '../context';
+import { loginUser, useAuthDispatch } from '../../context/';
 
 export function Login(){
     const dispatch = useAuthDispatch();

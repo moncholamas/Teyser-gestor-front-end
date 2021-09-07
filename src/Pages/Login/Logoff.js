@@ -1,13 +1,13 @@
-import { Button, Typography } from '@material-ui/core';
+import { Button, Divider, Typography } from '@material-ui/core';
 import React from 'react';
-import { useAuthDispatch, useAuthState,logout } from '../../context';
+import { useAuthDispatch,logout, useAuthState } from '../../context';
 
 
 
 export function Logoff(props){
     
+    const user = useAuthState();
     const dispatch = useAuthDispatch();
-    const token = useAuthState();
     const logOutHandle = ()=>{
             logout(dispatch);
             console.log("se deslogeó")
@@ -15,13 +15,30 @@ export function Logoff(props){
     }
     return (
         <>
+            {console.log('estamos aqui')}
             <Typography variant="h4">
-                {console.log(token)}
-                Adios
-                <Button onClick={logOutHandle}>
-                    Cerrar Sesión
-                </Button>
+                Cerrar Sesión
+                
             </Typography>
+            {
+                user.user.activo?
+                <Typography variant="body1">
+                Hasta pronto.
+                </Typography>
+                :
+                <Typography variant="body1">
+                Tu cuenta se encuentra actualmente inactiva.
+                </Typography>
+            }
+            
+            <Divider></Divider>
+            <br/>
+            {
+                
+            }
+            <Button onClick={logOutHandle} variant="contained" color="secondary" align="center">
+                    Cerrar Sesión
+            </Button>
         </>
     )
 }

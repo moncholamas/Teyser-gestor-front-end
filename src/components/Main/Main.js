@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import routes from '../../config/routes'
 import AppRoutes from '../AppRoutes';
-import { AsideMain } from '../Aside';
 import {  useAuthState } from '../../context';
 import {isExpired} from 'react-jwt'
 import { makeStyles } from '@material-ui/core/styles'
@@ -18,16 +17,21 @@ const useStyles = makeStyles({
 });
 
 export function Main (){
-    //llamar un componente distinto segun la ruta
-    const userToken = useAuthState().token;
-    const expired = isExpired(userToken);
+    //llamar un componente distinto según la ruta
+    const user = useAuthState();
+    const expired = isExpired(user.token);
     const classes = useStyles();
+
+    //StateMain es un objeto para compartir el stado de las operaciones entre main y aside
+    const [statusMain, setStatusMain] = useState({msj:'hola'});
+    const changeStatusMain= (newStatus) => {
+        setStatusMain(newStatus);
+    };
     return (
         <Grid container>
-                <Grid item xs={expired?12:8} >
+                <Grid item xs={12} >
 
                     <Paper variant="outlined" className={classes.root}>
-
                     
                     {
                         routes.map(route =>  (<AppRoutes
@@ -36,22 +40,15 @@ export function Main (){
                                 path={route.path}
                                 component={route.component}
                                 isPrivate={route.isPrivate}
+                                isActive={route.path==='/logoff'? true: user.user.activo}
                                 isExpired={expired}
+                                status = {statusMain}
+                                changeStatus = {changeStatusMain}
                         />)
                         )
                     }
                     </Paper>
-                </Grid>
-                {   
-                    /* si tiene no posee token no muestra el submenu */
-                    expired?
-                    null:
-                    (<Grid item xs={4}>
-                        <Grid >
-                            <AsideMain/>
-                        </Grid>
-                    </Grid>)
-                } 
-        </Grid>
+                    </Grid>
+            </Grid>
     );
 }
