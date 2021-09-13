@@ -1,4 +1,4 @@
-import { Grid} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import React from 'react';
 import { Footer } from './components/Footer/Footer';
 import { Main } from './components/Main/Main';
@@ -8,13 +8,12 @@ import { BrowserRouter as Router} from 'react-router-dom';
 
 function App() {
 
-
   //definir estilos generales (theme)
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-            <Grid container spacind={3} >
+            <Grid container>
               <Grid item xs={2}>
                 <Menu />
               </Grid>
@@ -22,7 +21,7 @@ function App() {
                 <Main />
               </Grid>
             </Grid>
-            <Footer></Footer>
+            <Footer />
         </div>
       </Router>
     </AuthProvider>

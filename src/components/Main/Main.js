@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import routes from '../../config/routes'
 import AppRoutes from '../AppRoutes';
@@ -9,8 +9,8 @@ import { blue } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
     root:{
-        padding:30,
-        marginTop:0,
+        margin:0,
+        padding:20, 
         color: blue,
         minHeight:490
     }
@@ -22,16 +22,11 @@ export function Main (){
     const expired = isExpired(user.token);
     const classes = useStyles();
 
-    //StateMain es un objeto para compartir el stado de las operaciones entre main y aside
-    const [statusMain, setStatusMain] = useState({msj:'hola'});
-    const changeStatusMain= (newStatus) => {
-        setStatusMain(newStatus);
-    };
     return (
         <Grid container>
                 <Grid item xs={12} >
 
-                    <Paper variant="outlined" className={classes.root}>
+                    <Paper variant="outlined" square className={classes.root}>
                     
                     {
                         routes.map(route =>  (<AppRoutes
@@ -42,8 +37,7 @@ export function Main (){
                                 isPrivate={route.isPrivate}
                                 isActive={route.path==='/logoff'? true: user.user.activo}
                                 isExpired={expired}
-                                status = {statusMain}
-                                changeStatus = {changeStatusMain}
+
                         />)
                         )
                     }

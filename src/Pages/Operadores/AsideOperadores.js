@@ -1,14 +1,27 @@
-import {  ListItemIcon, ListItemText, MenuItem, MenuList, Typography } from '@material-ui/core';
+import {  ListItemIcon, ListItemText, makeStyles, MenuItem, MenuList } from '@material-ui/core';
 import { ToggleOff, ToggleOn } from '@material-ui/icons';
 import React, {useState, useEffect}  from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../../context';
 
-export function AsideOperadores({statusMain}){ 
+export function AsideOperadores(props){ 
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          backgroundColor: theme.palette.background.paper
+        },
+      }));
+
+      const classes = useStyles();
+      const [selectedIndex, setSelectedIndex] = React.useState(null);
+    
+    
+      const handleMenuItemClick = (event, index) => {
+        setSelectedIndex(index);
+      };
+      
     const [operadores, setOperadores] = useState([]);
     const tokenUser = useAuthState().token;
     useEffect(()=>{
-        
         async function traerOperadores(){
             let res = await fetch("http://localhost:3009/operador",{
                 headers: {
@@ -22,17 +35,16 @@ export function AsideOperadores({statusMain}){
             setOperadores(data.data);
             }
             traerOperadores();
-    },[statusMain]); // eslint-disable-line react-hooks/exhaustive-deps
+    },[]); // eslint-disable-line react-hooks/exhaustive-deps
     return (
         <>
-            <Typography variant="body2" align="center" color="primary">
-                Operadores actuales
-                <br/>
-            </Typography>
-            <MenuList>
+            
+            <MenuList className={classes.root}>
                 {   
-                    operadores? operadores.map((operador)=>(
+                    operadores? operadores.map((operador,index)=>(
                         <MenuItem 
+                            selected={index === selectedIndex}
+                            onClick={(event) => handleMenuItemClick(event, index)}
                             component={Link} 
                             to={`/operadores/${operador.id_operador}`} 
                             key={operador.id_operador}

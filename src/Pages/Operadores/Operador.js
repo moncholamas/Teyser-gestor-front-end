@@ -35,9 +35,7 @@ export function Operador(props){
             });
             const data = await response.json();
 
-            console.log(props);
-            props.changeStatusMain(data);
-
+            console.log(data);
             history.push('/operadores/',{from:`/operadores/${idOperador}`})
         } catch (error) {
             console.log(error)
@@ -84,37 +82,38 @@ export function Operador(props){
                 Última modificación: {operador.createdAt} 
             </Typography>
             <Divider />
+            
             <br/>
-
             <Typography variant="h5" >
                 Opciones
             </Typography>
+
             <form onSubmit={handleSubmit}>
-            <FormGroup row >
-                <FormControlLabel
-                    control={
-                    <Checkbox 
-                        checked={state.checkedA} 
-                        onChange={handleChange} 
-                        name="checkedA" 
-                        color="primary"
+                <FormGroup row >
+                    <FormControlLabel
+                        control={
+                        <Checkbox 
+                            checked={state.checkedA} 
+                            onChange={handleChange} 
+                            name="checkedA" 
+                            color="primary"
+                        />
+                        }
+                        label= {operador.activo?'Desactivar Cuenta': 'Activar Cuenta'}
                     />
-                    }
-                    label= {operador.activo?'Desactivar Cuenta': 'Activar Cuenta'}
-                />
-                <br/>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    type="submit"
-                    disabled={!state.checkedA && !state.checkedB}
-                > Actualizar </Button>
-                <Button 
-                    variant="contained" 
-                    color="primary" 
-                    type="submit"
-                    disabled
-                > Convertir en Administrador </Button>
+                    <br/>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        type="submit"
+                        disabled={!state.checkedA && !state.checkedB}
+                    > Actualizar </Button>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        type="submit"
+                        disabled
+                    > Convertir en Administrador </Button>
                 </FormGroup>
             </form>
 
@@ -134,7 +133,6 @@ export function Operador(props){
                     startIcon={<DeleteForever/>}
                 > Eliminar Cuenta</Button>
             </Box>
-            
         </>
     )
 }
