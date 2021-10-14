@@ -1,5 +1,5 @@
-import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import Link from '@mui/material/Link';
 import {Link as WLink, useHistory} from 'react-router-dom';
 import React, {useState} from 'react';
 import { loginUser, useAuthDispatch } from '../../context/';
@@ -33,7 +33,7 @@ export function Login(){
     
     return (
         <>
-        <Grid item xs={10} mt={3}>
+        <Grid item xs={12} mt={3}>
             <Typography variant="h3" align="center">
                 Ingresar
             </Typography>
@@ -42,7 +42,7 @@ export function Login(){
             </Typography>
         </Grid>
         
-        <Grid item xs={10}>
+        <Grid item xs={12}>
             <Box component="form" textAlign="center" mt={3} onSubmit={enviarForm}>
                 <TextField
                     id="correo"

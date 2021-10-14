@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider,  Link,  ListItemIcon,  ListItemText,  makeStyles,  MenuItem,  MenuList } from '@material-ui/core'
+import { Divider,  Link,  List,  ListItem,  ListItemIcon,  ListItemText,  MenuItem,  MenuList } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuthState } from '../../context';
 import { isExpired , decodeToken } from 'react-jwt'
@@ -11,13 +11,7 @@ export function Menu(){
     const expired = isExpired(userToken);
     const user = decodeToken(userToken);
 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-          backgroundColor: theme.palette.background.paper,
-        },
-      }));
 
-    const classes = useStyles();
 
     const [selectedIndex, setSelectedIndex] = React.useState(null);
     
@@ -40,15 +34,11 @@ export function Menu(){
     ));
 
     return (
-        <>
-            <Link component={RouterLink} to="/" variant="h5">
-                    Teyser Gestor
-            </Link>
-            <Divider></Divider>
-            <MenuList className={classes.root}> 
+            <List > 
                 {
                     menuParcial.map((enlace, index)=> (
-                        <MenuItem 
+                        <ListItem 
+                            button
                             component={RouterLink} 
                             to={enlace.link} 
                             key={enlace.link}
@@ -56,16 +46,14 @@ export function Menu(){
                             selected={index === selectedIndex}
                         >
                                     <ListItemIcon>
+                                        {console.log(enlace)}
                                         < enlace.icon />
                                     </ListItemIcon>
-                                    <ListItemText>
-                                        { enlace.nombre }
-                                    </ListItemText>
-                        </MenuItem>
+                                    <ListItemText primary={enlace.nombre} /> 
+                        </ListItem>
                     ))
                 }
                 <Divider></Divider>
 
-            </MenuList>          
-     </>
+            </List>          
         )};

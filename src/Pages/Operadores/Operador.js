@@ -1,5 +1,5 @@
-import {  Box, Button, Checkbox, Divider, FormControlLabel, FormGroup, Typography } from '@material-ui/core';
-import { DeleteForever } from '@material-ui/icons';
+import {  Box, Button, Checkbox, Divider, FormControlLabel, FormGroup, Typography } from '@mui/material';
+import { DeleteForever } from '@mui/icons-material';
 import React, {useEffect,useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import { useAuthState } from '../../context';

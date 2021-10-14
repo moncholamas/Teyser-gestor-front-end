@@ -1,4 +1,4 @@
-import { Announcement, AssignmentTurnedIn, Battery80, Dvr, People, Print, ShoppingCart, Timeline, ViewQuilt } from '@material-ui/icons';
+import { Announcement, AssignmentTurnedIn, Battery80, Dvr, Forum, People, PowerSettingsNew, Print, ShoppingCart, Timeline, ViewQuilt } from '@mui/icons-material';
 
 const enlaces = [
     {
@@ -80,7 +80,7 @@ const enlaces = [
     },
     {
         nombre: 'Ingresar',
-        icon: Announcement,
+        icon: PowerSettingsNew,
         link: '/login',
         menuOperario: false,
         menuAdmin:false,
@@ -96,7 +96,7 @@ const enlaces = [
     },
     {
         nombre: 'Contacto',
-        icon: Announcement,
+        icon: Forum,
         link: '/contacto',
         menuOperario: false,
         menuAdmin:false,

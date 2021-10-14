@@ -1,4 +1,4 @@
-import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import {useHistory} from 'react-router-dom'
 export function Logup(){

@@ -1,17 +1,16 @@
 import React from 'react';
-import {Box, Divider, Grid,Typography} from '@material-ui/core';
+import {Box, Divider, Grid,Typography} from '@mui/material';
 
 export function Footer(){
     return (
         <>
-        <Divider></Divider>
         <Box component="footer" sx={{
             height: 50,
             marginTop: 30,
             padding: 20,
             bgcolor: 'primary'
         }}>
-        
+             <Divider />
             <Grid container>
                 <Grid item xs={6}>
                     <Typography variant="body1" color="textPrimary" align="center" >Mas info pie de pagina</Typography>

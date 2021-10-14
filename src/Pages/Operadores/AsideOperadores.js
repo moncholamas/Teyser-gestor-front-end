@@ -1,5 +1,5 @@
-import {  ListItemIcon, ListItemText, makeStyles, MenuItem, MenuList } from '@material-ui/core';
-import { ToggleOff, ToggleOn } from '@material-ui/icons';
+import {  ListItemIcon, ListItemText, makeStyles, MenuItem, MenuList } from '@mui/material';
+import { ToggleOff, ToggleOn } from '@mui/icons-material';
 import React, {useState, useEffect}  from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../../context';

@@ -1,5 +1,5 @@
 import {decodeToken} from 'react-jwt'
-const ROOT_URL = "http://localhost:3009"
+const ROOT_URL = "http://localhost:3003"
 
 export async function loginUser(dispatch, loginPayload){
     const requestOptions = {

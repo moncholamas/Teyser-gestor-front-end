@@ -1,4 +1,4 @@
-import { Button, Divider, Typography } from '@material-ui/core';
+import { Button, Divider, Typography } from '@mui/material';
 import React from 'react';
 import { useAuthDispatch,logout, useAuthState } from '../../context';
 

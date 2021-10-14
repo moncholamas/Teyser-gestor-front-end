@@ -1,5 +1,5 @@
-import { Box, TextField, Typography, Grid, Button } from '@material-ui/core';
-import { LinkedIn, WhatsApp } from '@material-ui/icons';
+import { Box, TextField, Typography, Grid, Button } from '@mui/material';
+import { LinkedIn, WhatsApp } from '@mui/icons-material';
 import React from 'react';
 
 export function Contacto(){
