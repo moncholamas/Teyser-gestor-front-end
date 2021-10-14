@@ -4,7 +4,7 @@ import React, {useEffect,useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import { useAuthState } from '../../context';
 
-export function Operador(props){
+export function Operador(){
     const [operador, setOperador] = useState({});
     const tokenUser = useAuthState().token;
     const idOperador = useParams().id;

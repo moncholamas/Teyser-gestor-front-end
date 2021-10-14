@@ -10,12 +10,9 @@ export function Logoff(props){
     const dispatch = useAuthDispatch();
     const logOutHandle = ()=>{
             logout(dispatch);
-            console.log("se deslogeó")
-            //setLocation('/');
     }
     return (
         <>
-            {console.log('estamos aqui')}
             <Typography variant="h4">
                 Cerrar Sesión
                 

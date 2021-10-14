@@ -13,7 +13,7 @@ const AppRoutes = ({component:Component,path,isPrivate,isExpired, isActive,...re
                         isPrivate && !isActive?
                         <Redirect to={{pathname: '/logoff'} } />
                         :
-                        <Component {...props} {...rest} />
+                        <Component {...props} {...rest} /> 
                     )}
                 {...rest}
             />

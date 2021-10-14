@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider,  Link,  List,  ListItem,  ListItemIcon,  ListItemText,  MenuItem,  MenuList } from '@mui/material'
+import { List,  ListItem,  ListItemIcon,  ListItemText } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom';
 import { useAuthState } from '../../context';
 import { isExpired , decodeToken } from 'react-jwt'
@@ -46,14 +46,11 @@ export function Menu(){
                             selected={index === selectedIndex}
                         >
                                     <ListItemIcon>
-                                        {console.log(enlace)}
                                         < enlace.icon />
                                     </ListItemIcon>
                                     <ListItemText primary={enlace.nombre} /> 
                         </ListItem>
                     ))
                 }
-                <Divider></Divider>
-
             </List>          
         )};

@@ -3,6 +3,7 @@ import  MiniDrawer from './components/Drawer/Drawer';
 import { AuthProvider } from './context';
 import { BrowserRouter as Router} from 'react-router-dom';
 
+
 function App() {
 
   //definir estilos generales (theme)
@@ -10,7 +11,8 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-            <MiniDrawer></MiniDrawer>
+            <MiniDrawer></MiniDrawer
+            >
         </div>
       </Router>
     </AuthProvider>

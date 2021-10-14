@@ -71,7 +71,7 @@ const routes = [
     {
         path: '/pagos',
         component: Pagos,
-        isPrivate: false,
+        isPrivate: true,
         allowsInactive: true,
         aside: AsidePagos
     },
