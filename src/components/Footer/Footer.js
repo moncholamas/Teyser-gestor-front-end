@@ -6,8 +6,6 @@ export function Footer(){
         <>
         <Box component="footer" sx={{
             height: 50,
-            marginTop: 30,
-            padding: 20,
             bgcolor: 'primary'
         }}>
              <Divider />

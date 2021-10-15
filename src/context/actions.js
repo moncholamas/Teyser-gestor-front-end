@@ -1,5 +1,5 @@
 import {decodeToken} from 'react-jwt'
-const ROOT_URL = "http://localhost:3003"
+export const ROOT_URL = "https://infinite-shelf-47181.herokuapp.com"
 
 export async function loginUser(dispatch, loginPayload){
     const requestOptions = {

@@ -130,7 +130,6 @@ export default function MiniDrawer() {
 
         <DrawerHeader />
             <Main />
-        <Footer />
       </Box>
     </Box>
   );
