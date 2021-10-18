@@ -1,4 +1,5 @@
-import {  Button, TextField, Typography } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import {  Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useState }  from 'react';
 
 
@@ -7,8 +8,8 @@ export function MainEquipos({editable,nuevo}){
     const [equipo, setEquipo] = useState({
         nombre_tecnico: "",
         nombre_fantasia: "",
-        estado: "",
-        categoria: ""
+        estado: "operativo",
+        categoria: "impresora"
     });
 
     const handleChange = (event) => {
@@ -27,7 +28,9 @@ export function MainEquipos({editable,nuevo}){
             <Typography variant="h5" align="center">
                 Ingresar nuevo
             </Typography>
-            <form onSubmit={handleSubmit}>
+            <Box onSubmit={handleSubmit} component="form">
+                
+                <FormControl fullWidth>
                 <TextField
                     required
                     id="nombre_tecnico"
@@ -37,7 +40,8 @@ export function MainEquipos({editable,nuevo}){
                     value={equipo.nombre_tecnico}
                     fullWidth
                 />
-                <br/>
+                </FormControl>
+                <FormControl fullWidth >
                 <TextField
                     required
                     id="nombre_fantasia"
@@ -47,30 +51,45 @@ export function MainEquipos({editable,nuevo}){
                     value={equipo.nombre_fantasia}
                     fullWidth
                 />
-                <br/>
-                <TextField
-                    required
+                </FormControl>
+
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+                    <Select
+                    labelId="estado"
                     id="estado"
                     name="estado"
+                    value={equipo.estado}
                     label="Estado"
                     onChange={handleChange}
-                    value={equipo.estado}
-                    fullWidth
-                />
-                <br/>
-                <TextField
-                    required
+                    >
+                    <MenuItem value={"operativo"} selected>Operativo</MenuItem>
+                    <MenuItem value={"en mantenimiento"}>En Mantenimiento</MenuItem>
+                    <MenuItem value={"inoperable"}>Inoperable</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+                    <Select
+                    labelId="categoria"
                     id="categoria"
                     name="categoria"
+                    value={equipo.categoria}
                     label="Categoria"
                     onChange={handleChange}
-                    value={equipo.categoria}
-                    fullWidth
-                />
+                    >
+                    <MenuItem value={"impresora"} selected>Impresora</MenuItem>
+                    <MenuItem value={"fotocopiadora"}>Fotocopiadora</MenuItem>
+                    <MenuItem value={"libreria"}>Librería</MenuItem>
+                    <MenuItem value={"red"}>Red</MenuItem>
+                    <MenuItem value={"otro"}>Otro</MenuItem>
+                    </Select>
+                </FormControl>
                 <br/>
                 
-            <Button fullWidth variant="contained" color="success" type="submit"> Cargar nuevo Equipo</Button>
-            </form>
+                
+            <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
+            </Box>
 
 
             

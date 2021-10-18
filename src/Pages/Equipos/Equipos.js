@@ -8,6 +8,9 @@ import {MainEquipos} from './MainEquipos';
 
 export function Equipos(){
     const [modoEdicion,setModoEdicion] = useState(false);
+    const [equipos, setEquipos] = useState([]);
+    const [cambioEstado, setCambioEstado] = useState(0);
+    const tokenUser = useAuthState().token;
 
     const activarEdicion = function(){
         setModoEdicion(true);
@@ -24,15 +27,16 @@ export function Equipos(){
                   },
                 body: JSON.stringify(equipo)
             });
+        //imprimir el equipo cargado en el front
         const data = await response.json();
         console.log(data);
+        setCambioEstado(cambioEstado+1);
         } catch (error) {
             console.log(error)   
         }
     }
 
-    const [equipos, setEquipos] = useState([]);
-    const tokenUser = useAuthState().token;
+    
     useEffect(()=>{
         async function traerOperadores(){
             let res = await fetch(`${ROOT_URL}/equipos`,{
@@ -45,7 +49,7 @@ export function Equipos(){
             setEquipos(data.data);
             }
             traerOperadores();
-    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+    },[cambioEstado]); // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <>
@@ -53,7 +57,8 @@ export function Equipos(){
                 Equipos
             </Typography>
             <Divider />
-            <Grid container spacing={2}>
+            <br/>
+            <Grid container spacing={4}>
                 <Grid item xs={4}>
                     <MainEquipos editable={modoEdicion} nuevo={cargarNuevo}></MainEquipos>
                 </Grid>
