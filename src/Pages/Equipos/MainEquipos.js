@@ -1,10 +1,15 @@
-import { Add } from '@mui/icons-material';
-import {  Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
-import React, { useState }  from 'react';
+import {  Add, Edit } from '@mui/icons-material';
+import {  Box, Button, FormControl, MenuItem, Select, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState }  from 'react';
+import { useAuthState } from '../../context';
+import {ROOT_URL} from '../../context/actions';
+import { nuevo, editar } from './functions';
 
 
-export function MainEquipos({editable,nuevo}){  
+export function MainEquipos({editable,actual,cambio}){  
+    const tokenUser = useAuthState().token;
 
+    const [otrosDatos, setOtrosDatos] = useState({});
     const [equipo, setEquipo] = useState({
         nombre_tecnico: "",
         nombre_fantasia: "",
@@ -18,15 +23,60 @@ export function MainEquipos({editable,nuevo}){
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(equipo);
-        nuevo(equipo);
+        const response = editable?
+        editar(equipo,tokenUser,actual):
+        nuevo(equipo,tokenUser);
+        if(response!==(-1)){
+            cambio(+1);
+        }
     }
+
+    
+
+    function cargarDatosActuales(data){
+        const {nombre_fantasia,nombre_tecnico,estado,categoria,createdAt,updatedAt} = data.data;
+        setEquipo({
+            nombre_fantasia:nombre_fantasia||'',
+            nombre_tecnico:nombre_tecnico||'',
+            estado:estado||'',
+            categoria:categoria||''
+        });
+        setOtrosDatos({
+            createdAt,
+            updatedAt
+        })
+    }
+    
+    const cargarDatosParaUpdate = async function(){
+        try {
+            const response = await fetch(`${ROOT_URL}/equipos/${actual}`,{
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-token": tokenUser
+                }
+            });
+        //guardar los datos en el equipo actual para pasarlo a Main
+        const data = await response.json();
+        cargarDatosActuales(data);
+            
+        } catch (error) {
+            console.log(error)   
+        }
+    }
+
+    useEffect( () => {
+        if(editable){
+            cargarDatosParaUpdate();
+        }
+        
+    }, [editable,actual])// eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <>
 
             <Typography variant="h5" align="center">
-                Ingresar nuevo
+                {editable?"Editar: " : "Ingresar nuevo"}
             </Typography>
             <Box onSubmit={handleSubmit} component="form">
                 
@@ -39,6 +89,7 @@ export function MainEquipos({editable,nuevo}){
                     onChange={handleChange}
                     value={equipo.nombre_tecnico}
                     fullWidth
+                    variant="filled"
                 />
                 </FormControl>
                 <FormControl fullWidth >
@@ -50,11 +101,12 @@ export function MainEquipos({editable,nuevo}){
                     onChange={handleChange}
                     value={equipo.nombre_fantasia}
                     fullWidth
+                    variant="filled"
                 />
                 </FormControl>
 
                 <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+                    
                     <Select
                     labelId="estado"
                     id="estado"
@@ -62,6 +114,7 @@ export function MainEquipos({editable,nuevo}){
                     value={equipo.estado}
                     label="Estado"
                     onChange={handleChange}
+                    variant="filled"
                     >
                     <MenuItem value={"operativo"} selected>Operativo</MenuItem>
                     <MenuItem value={"en mantenimiento"}>En Mantenimiento</MenuItem>
@@ -69,7 +122,7 @@ export function MainEquipos({editable,nuevo}){
                     </Select>
                 </FormControl>
                 <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Categoria</InputLabel>
+                
                     <Select
                     labelId="categoria"
                     id="categoria"
@@ -77,6 +130,7 @@ export function MainEquipos({editable,nuevo}){
                     value={equipo.categoria}
                     label="Categoria"
                     onChange={handleChange}
+                    variant="filled"
                     >
                     <MenuItem value={"impresora"} selected>Impresora</MenuItem>
                     <MenuItem value={"fotocopiadora"}>Fotocopiadora</MenuItem>
@@ -85,12 +139,39 @@ export function MainEquipos({editable,nuevo}){
                     <MenuItem value={"otro"}>Otro</MenuItem>
                     </Select>
                 </FormControl>
+                {
+                    editable?
+                    <FormControl fullWidth >
+                        <TextField
+                            disabled
+                            id="standard-disabled"
+                            value={otrosDatos.createdAt || ''}
+                            label="Fecha de creación"
+                            variant="filled"
+                        />
+                        <TextField
+                            disabled
+                            id="standard-disabled"
+                            value={otrosDatos.updatedAt || ''}
+                            label="Fecha de modificación"
+                            variant="filled"
+                        />
+                    </FormControl>
+                    :null
+                }
+
                 <br/>
                 
-                
-            <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
+            {
+                editable?
+                <Button fullWidth variant="contained" color="success" type="submit" startIcon={<Edit/>}> Editar Equipo existente</Button>
+                :
+                <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
+            } 
+            
             </Box>
-
+            
+            
 
             
         </>
