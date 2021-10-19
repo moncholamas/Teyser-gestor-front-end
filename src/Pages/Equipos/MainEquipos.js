@@ -3,10 +3,10 @@ import {  Box, Button, FormControl, MenuItem, Select, TextField, Typography } fr
 import React, { useEffect, useState }  from 'react';
 import { useAuthState } from '../../context';
 import {ROOT_URL} from '../../context/actions';
-import { nuevo, editar } from './functions';
+import { nuevo, editar, eliminar } from './functions';
 
 
-export function MainEquipos({editable,actual,cambio}){  
+export function MainEquipos({newmodo,actual,cambio}){  
     const tokenUser = useAuthState().token;
 
     const [otrosDatos, setOtrosDatos] = useState({});
@@ -23,11 +23,24 @@ export function MainEquipos({editable,actual,cambio}){
 
     function handleSubmit(e){
         e.preventDefault();
-        const response = editable?
-        editar(equipo,tokenUser,actual):
-        nuevo(equipo,tokenUser);
+        let response;
+        
+        switch (newmodo) {
+            case 'edit':
+                response = editar(equipo,tokenUser,actual);
+                    break;
+            case 'delete':
+                response = eliminar(actual,tokenUser);
+                    break;
+            default:
+                response = nuevo(equipo,tokenUser);
+                    break;
+        }
+        
         if(response!==(-1)){
             cambio(+1);
+        }else{
+            console.log("error")
         }
     }
 
@@ -47,7 +60,7 @@ export function MainEquipos({editable,actual,cambio}){
         })
     }
     
-    const cargarDatosParaUpdate = async function(){
+    const traerDatosActuales = async function(){
         try {
             const response = await fetch(`${ROOT_URL}/equipos/${actual}`,{
                 method: 'GET',
@@ -66,17 +79,26 @@ export function MainEquipos({editable,actual,cambio}){
     }
 
     useEffect( () => {
-        if(editable){
-            cargarDatosParaUpdate();
+        if(newmodo === 'edit'){
+            traerDatosActuales();
         }
         
-    }, [editable,actual])// eslint-disable-line react-hooks/exhaustive-deps
+    }, [newmodo,actual])// eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <>
 
             <Typography variant="h5" align="center">
-                {editable?"Editar: " : "Ingresar nuevo"}
+                {
+                    (()=>{
+                        switch (newmodo) {
+                            case 'edit': return "Editar"
+                            case 'delete': return "Borrar equipo existente"
+                            default: return "Ingresar uno nuevo"
+                        }
+                    })()
+                
+                }
             </Typography>
             <Box onSubmit={handleSubmit} component="form">
                 
@@ -90,6 +112,7 @@ export function MainEquipos({editable,actual,cambio}){
                     value={equipo.nombre_tecnico}
                     fullWidth
                     variant="filled"
+                    
                 />
                 </FormControl>
                 <FormControl fullWidth >
@@ -102,6 +125,7 @@ export function MainEquipos({editable,actual,cambio}){
                     value={equipo.nombre_fantasia}
                     fullWidth
                     variant="filled"
+                    
                 />
                 </FormControl>
 
@@ -115,6 +139,7 @@ export function MainEquipos({editable,actual,cambio}){
                     label="Estado"
                     onChange={handleChange}
                     variant="filled"
+                    
                     >
                     <MenuItem value={"operativo"} selected>Operativo</MenuItem>
                     <MenuItem value={"en mantenimiento"}>En Mantenimiento</MenuItem>
@@ -131,6 +156,7 @@ export function MainEquipos({editable,actual,cambio}){
                     label="Categoria"
                     onChange={handleChange}
                     variant="filled"
+                    
                     >
                     <MenuItem value={"impresora"} selected>Impresora</MenuItem>
                     <MenuItem value={"fotocopiadora"}>Fotocopiadora</MenuItem>
@@ -140,7 +166,7 @@ export function MainEquipos({editable,actual,cambio}){
                     </Select>
                 </FormControl>
                 {
-                    editable?
+                    newmodo==='edit' || newmodo ==='delete'?
                     <FormControl fullWidth >
                         <TextField
                             disabled
@@ -162,12 +188,16 @@ export function MainEquipos({editable,actual,cambio}){
 
                 <br/>
                 
-            {
-                editable?
-                <Button fullWidth variant="contained" color="success" type="submit" startIcon={<Edit/>}> Editar Equipo existente</Button>
-                :
-                <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
-            } 
+                {
+                (()=>{switch (newmodo) {
+                    case "edit":
+                        return <Button fullWidth variant="contained" color="success" type="submit" startIcon={<Edit/>}> Editar Equipo existente</Button>
+                    case "delete":
+                        return <Button fullWidth variant="contained" color="error" type="submit" startIcon={<Edit/>}> Borrar Equipo existente</Button>
+                    default:
+                        return <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
+                    }})()
+                } 
             
             </Box>
             

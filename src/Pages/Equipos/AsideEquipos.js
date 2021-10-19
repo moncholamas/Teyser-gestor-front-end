@@ -3,10 +3,12 @@ import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import React  from 'react';
 
 
-export function AsideEquipos({listado,editar}){  
-    const activarEdicion = function(id){
-        editar(id);
-    }
+export function AsideEquipos({listado,modo}){  
+    
+    const activarEdicion = function(id,modonuevo){
+        modo(id,modonuevo);
+    };
+
     return (
         <>
             <Typography variant="h5" align="center">
@@ -31,10 +33,10 @@ export function AsideEquipos({listado,editar}){
                                     <TableCell align="right">{equipo.nombre_tecnico}</TableCell>
                                     <TableCell align="right">{equipo.nombre_fantasia}</TableCell>
                                     <TableCell align="right">
-                                        <IconButton aria-label="edit" color="success" onClick={()=> activarEdicion(equipo.id_equipo)}>
+                                        <IconButton aria-label="edit" color="success" onClick={()=> activarEdicion(equipo.id_equipo,'edit')}>
                                             <Edit />
                                         </IconButton>
-                                        <IconButton aria-label="delete" color="error">
+                                        <IconButton aria-label="delete" color="error" onClick={()=> activarEdicion(equipo.id_equipo,'delete') }>
                                             <Delete />
                                         </IconButton> 
                                     </TableCell>
