@@ -1,14 +1,11 @@
 import {  Add, Edit } from '@mui/icons-material';
 import {  Box, Button, FormControl, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState }  from 'react';
-import { useAuthState } from '../../context';
 import {ROOT_URL} from '../../context/actions';
 import { nuevo, editar, eliminar } from './functions';
 
 
-export function MainEquipos({newmodo,actual,cambio}){  
-    const tokenUser = useAuthState().token;
-
+export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){  
     const [otrosDatos, setOtrosDatos] = useState({});
     const [equipo, setEquipo] = useState({
         nombre_tecnico: "",
@@ -39,6 +36,15 @@ export function MainEquipos({newmodo,actual,cambio}){
         
         if(response!==(-1)){
             cambio(+1);
+            actualizarmodo('new');
+            setEquipo(
+                {
+                    nombre_tecnico: "",
+                    nombre_fantasia: "",
+                    estado: "operativo",
+                    categoria: "impresora"
+                }
+            )
         }else{
             console.log("error")
         }
@@ -82,7 +88,12 @@ export function MainEquipos({newmodo,actual,cambio}){
         if(newmodo === 'edit'){
             traerDatosActuales();
         }
-        
+        if(newmodo === 'delete'){
+            traerDatosActuales();
+        }
+        if(newmodo === 'view'){
+            traerDatosActuales();
+        }
     }, [newmodo,actual])// eslint-disable-line react-hooks/exhaustive-deps
     
     return (
@@ -94,6 +105,7 @@ export function MainEquipos({newmodo,actual,cambio}){
                         switch (newmodo) {
                             case 'edit': return "Editar"
                             case 'delete': return "Borrar equipo existente"
+                            case 'view': return "Detalles"
                             default: return "Ingresar uno nuevo"
                         }
                     })()
@@ -166,7 +178,7 @@ export function MainEquipos({newmodo,actual,cambio}){
                     </Select>
                 </FormControl>
                 {
-                    newmodo==='edit' || newmodo ==='delete'?
+                    newmodo==='edit' || newmodo ==='delete' || newmodo==='view'?
                     <FormControl fullWidth >
                         <TextField
                             disabled
@@ -194,6 +206,7 @@ export function MainEquipos({newmodo,actual,cambio}){
                         return <Button fullWidth variant="contained" color="success" type="submit" startIcon={<Edit/>}> Editar Equipo existente</Button>
                     case "delete":
                         return <Button fullWidth variant="contained" color="error" type="submit" startIcon={<Edit/>}> Borrar Equipo existente</Button>
+                    case "view": return null;
                     default:
                         return <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
                     }})()
