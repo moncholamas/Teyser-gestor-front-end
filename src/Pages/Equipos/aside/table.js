@@ -26,6 +26,7 @@ export function TableAside({equipos,modo}){
                                 return <TableRow
                                             key={equipo.id_equipo}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            onClick={()=>console.log("hiciste click en")}
                                             >
                                             
                                             <TableCell align="center">

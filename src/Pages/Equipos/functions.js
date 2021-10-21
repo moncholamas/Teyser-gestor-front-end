@@ -77,3 +77,12 @@ export async function traerOperadores(tokenUser){
         return null;
     }
 }
+
+export function limpiarDatosActuales(){
+    return {
+        nombre_tecnico: "",
+        nombre_fantasia: "",
+        estado: "operativo",
+        categoria: "impresora"
+    };
+}

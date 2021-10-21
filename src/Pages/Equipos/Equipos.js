@@ -33,14 +33,27 @@ export function Equipos(){
     },[cambioEstado]); // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
-        <>
-            <Typography variant="h3">
-                Equipos
-            </Typography>
+        <>  
+            <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+            >
+                <Grid item>
+                    <Typography variant="h3" sx={{display:'inline'}}>
+                    Equipos
+                    </Typography>
+                </Grid>
+                
+            </Grid>
+            
             <Divider />
             <br/>
             <Grid container  spacing={4}>
                 <Grid item xs={12} md={4}>
+                <Grid item alignSelf="center">
+                </Grid>
                     <MainEquipos 
                         newmodo={modo} 
                         actualizarmodo={setModo} 

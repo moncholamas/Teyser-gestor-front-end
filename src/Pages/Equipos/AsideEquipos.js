@@ -1,6 +1,8 @@
 import React, { useEffect, useState }  from 'react';
 import { traerOperadores } from './functions';
 import {TableAside} from './aside/table'
+import { Filter } from './aside/filter';
+import { Box, Divider, Paper } from '@mui/material';
 
 
 export function AsideEquipos({modo,tokenUser}){  
@@ -17,10 +19,19 @@ export function AsideEquipos({modo,tokenUser}){
 
     return (
         <>
+        <Box 
+            component={Paper}
+            outlined
+            sx={{marginTop:{xs:0,md:-10},padding:{xs:0,md:2}}}
+        >
+            <Filter modo={modo}/>
+            <Divider sx={{marginTop:2}}/>
             <TableAside 
                 modo={modo}
                 equipos={equipos}
-            />
+            /> 
+        </Box>
+                      
         </>
     )
 }

@@ -2,7 +2,7 @@ import {  Add, Edit } from '@mui/icons-material';
 import {  Box, Button, FormControl, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState }  from 'react';
 import {ROOT_URL} from '../../context/actions';
-import { nuevo, editar, eliminar } from './functions';
+import { nuevo, editar, eliminar, limpiarDatosActuales } from './functions';
 
 
 export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){  
@@ -85,14 +85,11 @@ export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){
     }
 
     useEffect( () => {
-        if(newmodo === 'edit'){
+        if(newmodo === 'edit' || newmodo === 'delete' || newmodo === 'view'){
             traerDatosActuales();
         }
-        if(newmodo === 'delete'){
-            traerDatosActuales();
-        }
-        if(newmodo === 'view'){
-            traerDatosActuales();
+        if(newmodo === 'new'){
+            setEquipo( limpiarDatosActuales());
         }
     }, [newmodo,actual])// eslint-disable-line react-hooks/exhaustive-deps
     
