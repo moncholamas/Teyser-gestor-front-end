@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from '@mui/material';
+import { Box, Divider, Grid, LinearProgress, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from '../../context';
 
@@ -34,6 +34,9 @@ export function Equipos(){
     
     return (
         <>  
+        <Box sx={{ width: '100%'}}>
+                
+        </Box>
             <Grid
                 container
                 direction="row"
@@ -64,7 +67,8 @@ export function Equipos(){
                 </Grid>
                 <Grid item xs={12} md={8}>
                     <AsideEquipos  
-                        modo={cambiarmodo}
+                        modo={modo}
+                        cambiarModo={cambiarmodo}
                         tokenUser={tokenUser}
                     />
                 </Grid>

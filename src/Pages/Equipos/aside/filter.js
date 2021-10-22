@@ -20,7 +20,6 @@ export function Filter({modo}){
             alignItems="center"
         >
             
-            
             <Grid item >
                 <Button 
                             variant="contained" 

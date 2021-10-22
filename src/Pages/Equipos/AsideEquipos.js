@@ -5,7 +5,7 @@ import { Filter } from './aside/filter';
 import { Box, Divider, Paper } from '@mui/material';
 
 
-export function AsideEquipos({modo,tokenUser}){  
+export function AsideEquipos({cambiarModo,tokenUser,modo}){  
     const [equipos, setEquipos] = useState([]);
 
     //vistas -> [main, search]
@@ -21,14 +21,16 @@ export function AsideEquipos({modo,tokenUser}){
         <>
         <Box 
             component={Paper}
-            outlined
             sx={{marginTop:{xs:0,md:-10},padding:{xs:0,md:2}}}
         >
-            <Filter modo={modo}/>
+            
+
+            <Filter modo={cambiarModo}/>
             <Divider sx={{marginTop:2}}/>
             <TableAside 
-                modo={modo}
+                cambiarModo={cambiarModo}
                 equipos={equipos}
+                modo={modo}
             /> 
         </Box>
                       
