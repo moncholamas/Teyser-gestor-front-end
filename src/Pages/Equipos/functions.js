@@ -2,7 +2,6 @@ import {ROOT_URL} from '../../context/actions';
 
 //envia los datos del nuevo equipo al Back
 export const nuevo = async function(equipo, tokenUser){
-        
     try {
         const response = await fetch(`${ROOT_URL}/equipos/nuevo`,{
             method: 'POST',
@@ -15,10 +14,8 @@ export const nuevo = async function(equipo, tokenUser){
     //imprimir el equipo cargado en el front
     const data = await response.json();
     return data;
-
     } catch (error) {
-        console.log(error);
-        return -1;
+        throw new Error('error al acceder al API para ingresar nuevo item');
     }
 }
 
@@ -36,8 +33,7 @@ export const eliminar = async function(id, tokenUser){
     const data = await response.json();
     return data;
     } catch (error) {
-        console.log(error);
-        return -1;
+        throw new Error('error al acceder al API para borrar un item');
     }
 }
 
@@ -56,8 +52,7 @@ export async function editar(equipo,tokenUser,actual){
     const data = await response.json();
     return data
     } catch (error) {
-        console.log(error);
-        return -1;
+        throw new Error('error al acceder al API para actualizar un item');
     }
 }
 
@@ -71,10 +66,9 @@ export async function traerOperadores(tokenUser){
               },
         });
         let data = await res.json();
-        console.log(data.data)
         return data.data;
     } catch (error) {
-        return null;
+        throw new Error('Error al conectar con API');
     }
 }
 

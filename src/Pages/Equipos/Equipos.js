@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, LinearProgress, Typography } from '@mui/material';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from '../../context';
 

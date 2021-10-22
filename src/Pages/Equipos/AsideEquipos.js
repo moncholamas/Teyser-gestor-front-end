@@ -12,8 +12,17 @@ export function AsideEquipos({cambiarModo,tokenUser,modo}){
     const [vista, ] = useState('main')
 
     useEffect(() => {
+        async function generarVista(){
+            try {
+                const resultado = await traerOperadores(tokenUser);
+                setEquipos(resultado);
+            } catch (error) {
+                //manejar el error en la vista PENDIENTE
+                setEquipos([]);
+            }
+        }
         if(vista==='main'){
-            traerOperadores(tokenUser).then(res=>setEquipos(res)).catch(console.log("error en algun lado"));
+            generarVista();
         }
     }, [vista])// eslint-disable-line react-hooks/exhaustive-deps
 

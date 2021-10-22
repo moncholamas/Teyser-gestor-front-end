@@ -58,7 +58,6 @@ export function TableAside({equipos,cambiarModo,modo}){
                                                 <IconButton aria-label="delete" color="error" onClick={()=> activarEdicion(equipo.id_equipo,'delete') }>
                                                     <Delete />
                                                 </IconButton> 
-                                                {console.log(indiceActual===equipo.id_equipo?'fila elegida':null, equipo.nombre_tecnico)}
                                             </TableCell>
                                     </TableRow>
                             })

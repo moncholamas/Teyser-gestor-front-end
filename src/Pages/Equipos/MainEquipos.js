@@ -18,35 +18,25 @@ export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){
         setEquipo({...equipo, [event.target.name]: event.target.value });
       };
 
-    function handleSubmit(e){
-        e.preventDefault();
-        let response;
-        
-        switch (newmodo) {
-            case 'edit':
-                response = editar(equipo,tokenUser,actual);
+    async function handleSubmit(e){
+        e.preventDefault();     
+        try {
+            switch (newmodo) {
+                case 'edit':
+                    await editar(equipo,tokenUser,actual);
+                        break;
+                case 'delete':
+                    await eliminar(actual,tokenUser);
+                        break;
+                case 'new':
+                    await nuevo(equipo,tokenUser);
                     break;
-            case 'delete':
-                response = eliminar(actual,tokenUser);
-                    break;
-            default:
-                response = nuevo(equipo,tokenUser);
-                    break;
-        }
-        
-        if(response!==(-1)){
-            cambio(+1);
-            actualizarmodo('new');
-            setEquipo(
-                {
-                    nombre_tecnico: "",
-                    nombre_fantasia: "",
-                    estado: "operativo",
-                    categoria: "impresora"
-                }
-            )
-        }else{
-            console.log("error")
+                default: break;
+            }
+            //limpiar formulario y recargar tabla
+        } catch (error) {
+            //manejar el error en la vista PENDIENTE
+                console.log(error);
         }
     }
 
