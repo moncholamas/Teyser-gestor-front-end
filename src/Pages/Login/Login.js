@@ -2,11 +2,13 @@ import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import {Link as WLink, useHistory} from 'react-router-dom';
 import React, {useState} from 'react';
-import { loginUser, useAuthDispatch } from '../../context/';
+import { loginUser, useAuthDispatch, useAuthState } from '../../context/';
 
 export function Login(){
     const dispatch = useAuthDispatch();
     const history = useHistory();
+
+    const {loading, errorMsg} = useAuthState();
 
     const [valido, setValido] = useState(false);
     const [values, setValues] = useState({
@@ -24,9 +26,11 @@ export function Login(){
         const payload = {correo: values.correo,clave: values.clave}
         try {
             let response = await loginUser(dispatch,payload);
+            console.log(response);
             if (!response)return;
             history.push("/ventas",{from:"Login"})
         } catch (error) {
+            //console.log(response)
             console.log(error)
         }        
     }
@@ -34,6 +38,12 @@ export function Login(){
     return (
         <>
         <Grid item xs={12} mt={3}>
+                {
+                    loading ? <p>Cargadndo</p> : null
+                }
+                {
+                    errorMsg ? <p>{errorMsg}</p> : null
+                }
             <Typography variant="h3" align="center">
                 Ingresar
             </Typography>

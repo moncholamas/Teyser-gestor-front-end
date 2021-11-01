@@ -23,7 +23,6 @@ export function Main (){
                                 isPrivate={route.isPrivate}
                                 isActive={route.path==='/logoff'? true: activo}
                                 isExpired={expired}
-
                         />)
                         )
                     }

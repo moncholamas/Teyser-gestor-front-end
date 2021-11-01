@@ -5,7 +5,7 @@ import { Filter } from './aside/filter';
 import { Box, Divider, Paper } from '@mui/material';
 
 
-export function AsideEquipos({cambiarModo,tokenUser,modo}){  
+export function AsideEquipos({cambiarModo,tokenUser,modo,setStatus,status}){  
     const [equipos, setEquipos] = useState([]);
 
     //vistas -> [main, search]
@@ -18,13 +18,18 @@ export function AsideEquipos({cambiarModo,tokenUser,modo}){
                 setEquipos(resultado);
             } catch (error) {
                 //manejar el error en la vista PENDIENTE
+                setStatus({
+                    date: Date.now(),
+                    type: "error",
+                    msg: "Error al traer los operadores, verificando su conexión..."
+                });
                 setEquipos([]);
             }
         }
         if(vista==='main'){
             generarVista();
         }
-    }, [vista])// eslint-disable-line react-hooks/exhaustive-deps
+    }, [vista,status.type==='success'])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>

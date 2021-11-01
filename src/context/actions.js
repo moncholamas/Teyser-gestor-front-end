@@ -11,6 +11,7 @@ export async function loginUser(dispatch, loginPayload){
         dispatch({type:'REQUEST_LOGIN'});
         let response = await fetch(`${ROOT_URL}/ingresar`,requestOptions)
         let data = await response.json();
+
         const tokenResponse = data.data;
         if(tokenResponse){
             //data {msg / data(token)}
@@ -27,11 +28,11 @@ export async function loginUser(dispatch, loginPayload){
             return data;
         }
 
-        dispatch({type:'LOGIN_ERROR',error:data.errors[0]});
+        dispatch({type:'LOGIN_ERROR',error: data.msg});
         return;
 
     } catch (error) {
-        dispatch({type:'LOGIN_ERROR',error:error})
+        dispatch({type:'LOGIN_ERROR',error: 'error al enviar datos'})
     }
 }
 

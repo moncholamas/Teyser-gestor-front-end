@@ -1,11 +1,10 @@
-import {  Add, Edit } from '@mui/icons-material';
+import {  Add, DeleteForever, Edit } from '@mui/icons-material';
 import {  Box, Button, FormControl, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState }  from 'react';
-import {ROOT_URL} from '../../context/actions';
-import { nuevo, editar, eliminar, limpiarDatosActuales } from './functions';
+import { nuevo, editar, eliminar, limpiarDatosActuales, traerDatosActuales, cargarDatosActuales } from './functions';
 
 
-export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){  
+export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser,setStatus}){  
     const [otrosDatos, setOtrosDatos] = useState({});
     const [equipo, setEquipo] = useState({
         nombre_tecnico: "",
@@ -21,66 +20,61 @@ export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){
     async function handleSubmit(e){
         e.preventDefault();     
         try {
+            let res;
             switch (newmodo) {
                 case 'edit':
-                    await editar(equipo,tokenUser,actual);
+                    res = await editar(equipo,tokenUser,actual);
                         break;
                 case 'delete':
-                    await eliminar(actual,tokenUser);
+                    res = await eliminar(actual,tokenUser);
                         break;
                 case 'new':
-                    await nuevo(equipo,tokenUser);
+                    res = await nuevo(equipo,tokenUser);
                     break;
                 default: break;
             }
+            setStatus({
+                type: "success",
+                date: Date.now(),
+                msg: res.msj
+            });
             //limpiar formulario y recargar tabla
         } catch (error) {
-            //manejar el error en la vista PENDIENTE
-                console.log(error);
+                    //manejar el error en la vista PENDIENTE
+                setStatus({
+                    date: Date.now(),
+                    type: "error",
+                    msg: error.message
+                });
         }
     }
 
-    
-
-    function cargarDatosActuales(data){
-        const {nombre_fantasia,nombre_tecnico,estado,categoria,createdAt,updatedAt} = data.data;
-        setEquipo({
-            nombre_fantasia:nombre_fantasia||'',
-            nombre_tecnico:nombre_tecnico||'',
-            estado:estado||'',
-            categoria:categoria||''
-        });
-        setOtrosDatos({
-            createdAt,
-            updatedAt
-        })
-    }
-    
-    const traerDatosActuales = async function(){
-        try {
-            const response = await fetch(`${ROOT_URL}/equipos/${actual}`,{
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-token": tokenUser
-                }
-            });
-        //guardar los datos en el equipo actual para pasarlo a Main
-        const data = await response.json();
-        cargarDatosActuales(data);
-            
-        } catch (error) {
-            console.log(error)   
-        }
-    }
 
     useEffect( () => {
-        if(newmodo === 'edit' || newmodo === 'delete' || newmodo === 'view'){
-            traerDatosActuales();
+        const mostrarInfo = async ()=>{
+            try {
+                if(newmodo === 'edit' || newmodo === 'delete' || newmodo === 'view'){
+                    const response = await traerDatosActuales(tokenUser,actual);
+                    const {equipo, otrosDatos} = cargarDatosActuales(response);
+                    setEquipo(equipo);
+                    setOtrosDatos(otrosDatos);
+                }
+                if(newmodo === 'new'){
+                    setEquipo( limpiarDatosActuales());
+                } 
+            } catch (error) {
+                //generar un status para manejar el error en la vista
+                setStatus({
+                    date: Date.now(),
+                    type: "error",
+                    msg: "Error al obtener los datos del equipo"
+                });
+                //manejar el error en al vista
+            }
+            
         }
-        if(newmodo === 'new'){
-            setEquipo( limpiarDatosActuales());
-        }
+        
+        mostrarInfo()
     }, [newmodo,actual])// eslint-disable-line react-hooks/exhaustive-deps
     
     return (
@@ -192,7 +186,7 @@ export function MainEquipos({newmodo, actualizarmodo,actual,cambio,tokenUser}){
                     case "edit":
                         return <Button fullWidth variant="contained" color="success" type="submit" startIcon={<Edit/>}> Editar Equipo existente</Button>
                     case "delete":
-                        return <Button fullWidth variant="contained" color="error" type="submit" startIcon={<Edit/>}> Borrar Equipo existente</Button>
+                        return <Button fullWidth variant="contained" color="error" type="submit" startIcon={<DeleteForever/>}> Borrar de forma permanente</Button>
                     case "view": return null;
                     default:
                         return <Button fullWidth variant="contained" color="primary" type="submit" startIcon={<Add/>}> Cargar nuevo Equipo</Button>
